@@ -1,4 +1,20 @@
 services:
+  primary:
+    build:
+      context: .
+      dockerfile: ./apps/primary/Dockerfile
+      target: development
+    command: yarn start:dev primary
+    env_file:
+      - ./apps/primary/.env
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '3000:3000'
+
   mongodb:
     image: mongo
     ports:
