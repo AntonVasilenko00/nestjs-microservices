@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import * as Joi from 'joi';
 import { UsersModule } from './users/users.module';
 import { DatabaseModule } from '@app/common';
+import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [
@@ -20,6 +21,6 @@ import { DatabaseModule } from '@app/common';
     UsersModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, LocalStrategy],
 })
 export class AuthModule {}

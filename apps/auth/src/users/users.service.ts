@@ -24,4 +24,19 @@ export class UsersService {
   async getUsers(): Promise<User[]> {
     return await this.usersRepository.find({});
   }
+
+  async validateUser(email: string, password: string): Promise<User> {
+    const user = await this.usersRepository.findOne({
+      email,
+    });
+
+    if (!user) throw new UnprocessableEntityException('User not found');
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid)
+      throw new UnprocessableEntityException('Invalid password');
+
+    return user;
+  }
 }
