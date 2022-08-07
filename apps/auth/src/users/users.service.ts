@@ -3,6 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UsersRepository } from './users.repository';
 import { User } from './users.schema';
 import * as bcrypt from 'bcrypt';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class UsersService {
@@ -23,6 +24,10 @@ export class UsersService {
 
   async getUsers(): Promise<User[]> {
     return await this.usersRepository.find({});
+  }
+
+  async getUser(id: Types.ObjectId): Promise<User> {
+    return await this.usersRepository.findOne({ _id: id });
   }
 
   async validateUser(email: string, password: string): Promise<User> {
