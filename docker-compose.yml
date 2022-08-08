@@ -9,6 +9,7 @@ services:
       - ./apps/primary/.env
     depends_on:
       - mongodb
+      - rabbitmq
       - auth
     volumes:
       - .:/usr/src/app
@@ -26,11 +27,17 @@ services:
       - ./apps/auth/.env
     depends_on:
       - mongodb
+      - rabbitmq
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     ports:
       - '3001:3001'
+
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - '5672:5672'
 
   mongodb:
     image: mongo
