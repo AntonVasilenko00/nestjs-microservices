@@ -26,6 +26,27 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Start project
+1.run apps
+
+```bash
+$ docker-compose up
+```
+
+2.check swagger docs
+
+  open localhost:3000/docs - primary app
+
+  open localhost:3001/docs - auth microservice
+
+3.check project is working
+
+  create a new user,
+  
+  log in - get jwt.
+ 
+  try to reach primary app private endpoint with/without jwt - you should see primary service communicating with auth via rabbitmq
+
 ## Installation
 
 ```bash
